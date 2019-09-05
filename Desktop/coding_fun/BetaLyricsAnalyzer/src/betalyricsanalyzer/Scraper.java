@@ -48,9 +48,7 @@ public class Scraper {
         
         String lyrics = "";
         
-        
         try{
-            
             String url = cleanLyricsWikiaURL(artist, title);
             
             String userAgent = initUserAgent(); // or "Mozilla/17.0"
@@ -58,34 +56,12 @@ public class Scraper {
             
             lyrics = d.select(".lyricbox").get(0).text();
             
-            // Catches error from unavailable lyrics via lyrics wikia
-            // Retries using oldielyrics.com
+          // Catches error from unavailable lyrics via lyrics wikia
         } catch(IOException | IndexOutOfBoundsException e) {
-            /*
-            String tryAgainTitle = title;
-            String tryAgainArtist = artist;
-            //JOptionPane.showMessageDialog(this, "Error connecting to lyrics for selected song. This will be fixed in the future.", "ERROR:", JOptionPane.ERROR_MESSAGE);
-            
-            String url = cleanOldiesLyricsURL(artist, title);
-        
-            Document f = Jsoup.connect(url).userAgent(initUserAgent()).maxBodySize(0).get();
-            
-            lyrics = f.select("#lyrics").get(0).text();
-            
-            */
             System.out.println("LYRICS UNAVAILABLE");
-            
         }
             return lyrics;
         
-    }
-    
-    public void cleanUpLyrics(String lyrics) {
-        // TODO: every time there is a capital, start a new line (insert linebreak)
-        // Instructions:
-        // 1. Chop up every word using scanner
-        // 2. If word has a capital letter in the beginning then
-        //    start a new line (i.e. insert \n before it).
     }
     
     public String cleanLyricsWikiaURL(String testArtist, String testTitle) {
@@ -103,7 +79,7 @@ public class Scraper {
                 testArtist = testArtist.replace("and", "%26");
             }
             
-            // Specific song artist cases -----------------------
+            // Specific song artist corner cases -----------------------
             
             // Unknown year
             if(testArtist.equals("Carl_Dobkins_Jr.")) {
@@ -120,7 +96,7 @@ public class Scraper {
             testTitle = testTitle.replace(" ", "_");
             testTitle = testTitle.replace(",", "");
             
-            // Specific song title cases -----------------------
+            // Specific song title corner cases -----------------------
             
             // 1954
             if(testTitle.equals("Oh!_My_Pa-Pa")) {
@@ -145,16 +121,11 @@ public class Scraper {
                 testTitle = "Return_To_Me_(Ritorna-Me)";
             }
             
-            
-            
-            // Last step
+            // Last step - wrap up URL for integration
             String url = "http://lyrics.wikia.com/wiki/" + testArtist + ":" + testTitle;
             System.out.println("URL: " + url + "\n");
         
             return url;
-        
-        
-        
     }
     
     public String cleanOldiesLyricsURL(String artist, String title) {
@@ -185,7 +156,6 @@ public class Scraper {
             tryAgainTitle = "on_top_of_old_smokey";
         }
 
-
         // -------------------------------------------------
 
         // Artist formatting:
@@ -199,12 +169,10 @@ public class Scraper {
             tryAgainArtist = tryAgainArtist.substring(0, tryAgainArtist.indexOf("featuring") - 1 );
         }
 
-
         String url = "https://www.oldielyrics.com/lyrics/" + tryAgainArtist + "/" + tryAgainTitle + ".html";
         System.out.println("\n" + "URL: " + url);
         
         return url;
-        
         
     }
     
@@ -309,9 +277,6 @@ public class Scraper {
                     rank = rankHead.get(0).text();
                     songName = cols.get(0).text();
                     artistName = cols.get(1).text();
-                    //Testing
-                    //System.out.println("Rank: " + rank + "/" + "Title: " + songName + "/ Artist: " +
-                            //artistName);
                 }
                 
                 // the tie case
@@ -319,7 +284,6 @@ public class Scraper {
                     rank = "50";
                     songName = cols.get(1).text();
                     artistName = cols.get(2).text();
-                
                     endScrape = true;
                 }
                 
@@ -336,17 +300,12 @@ public class Scraper {
                 Song newSong = new Song(year + "", rank, songName, artistName, "");
                 songs.add(newSong);
                 
-                // testing
-               // System.out.println(newSong.toString());
-               
                rowCounter++;
             }
             
-            
-           } catch(IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
-            }
-        
+          }
         
         return songs;
         
@@ -366,14 +325,13 @@ public class Scraper {
     
     public void waitTime(int timeMS) {
        
-        
-            int sleepTime = timeMS;
-            try{
-                Thread.sleep(sleepTime); //sleep for n milliseconds
-            }catch(Exception e){
-                // only fires if topic is interruped by another process
-            }
+        // wait specific amount of time
+        int sleepTime = timeMS;
+        try{
+            Thread.sleep(sleepTime); //sleep for n milliseconds
+        }catch(Exception e){
+            // only fires if topic is interruped by another process
+        }
     }
-    
     
 } // end of class

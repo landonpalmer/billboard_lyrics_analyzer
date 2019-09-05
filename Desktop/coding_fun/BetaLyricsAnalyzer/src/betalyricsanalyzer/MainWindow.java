@@ -63,16 +63,10 @@ public class MainWindow extends javax.swing.JFrame {
 
     // ====================== Declaration of instance variables ======================= //
 
-    // Maybe: arrayLists full of billboard song objects
-    // key is year, value is arraylist?
     
     private HashMap<String, Song> songObjects;
-    
     private ArrayList<Song> bbSongs;
-    
-    // for setting class variable year
-    private int classYear;
-    
+    private int classYear; // for setting class variable year
     private File currentFile;
     
     /**
@@ -80,15 +74,7 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
 
-        
         initComponents();
-        
-        
-//        try {
-//            // TODO add your handling code here:
-//            importSongObjects();
-//        } catch (IOException ex) {
-//        }
         
         // Lyrics window closed on start
         dialogue_lyricsWindow.setVisible(false);
@@ -120,7 +106,6 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO: replace with lyrics window
         textArea_lyrics.setText("Sorry, the lyrics for this song are unavailable.");
                 
-       
     }
 
     /**
@@ -441,8 +426,6 @@ public class MainWindow extends javax.swing.JFrame {
         for(Song song: bbSongs)
             System.out.println(song.toString());
         
-       //table_songsList.getColumnModel().getColumn(0).;
-       //test
      
     }//GEN-LAST:event_comboBox_selectYearActionPerformed
 
@@ -456,74 +439,10 @@ public class MainWindow extends javax.swing.JFrame {
             XSSFRow row;
             row = ws.createRow(r);
             for(int c = 0; c < table_songsList.getColumnCount(); c++) {
-                
                 XSSFCell cell = row.createCell(c);
                 cell.setCellValue( (String) table_songsList.getValueAt(r, c));
-                
             }
         }
-        
-        /* Third try- close but no cigar
-        ///Users/landonpalmer/Desktop/
-        
-        File currentFile = new File("Billboard_Year_" + classYear + ".xlsx");
-        
-        try {
-        FileOutputStream fos = new FileOutputStream(currentFile);
-        wb.write(fos);
-        
-        
-       
-        
-        
-        JFileChooser jFileChooser = new JFileChooser();
-        jFileChooser.setSelectedFile(currentFile);
-        jFileChooser.showSaveDialog(null);
-        
-        fos.close();
-        
-        
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-        } */
-        
-        /* second try- not fullproof
-        
-         //Calls a file chooser
-        // User chooses a file and the file is assigned <currentFile> instance variable
-        // Then calls the saveActionPerformed method to actually save the file.
-        
-        JFileChooser jfc = new JFileChooser();
-        
-        if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-            
-            
-            jfc.setSelectedFile(new File("fileToSave.txt"));
-            jfc.showSaveDialog(null);
-            
-            
-            
-            try {
-            
-                FileOutputStream fos = new FileOutputStream(currentFile);
-                wb.write(fos);
-                fos.close();
-            
-                JOptionPane.showMessageDialog(this, "Table was successfully exported to an Excel file on Desktop", "Success!", JOptionPane.INFORMATION_MESSAGE);
-            
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
-        }
-      */
-        
-        // first try- fully fullproof
         
         // Write Excel to file system
         try {
@@ -539,9 +458,6 @@ public class MainWindow extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
         
     }//GEN-LAST:event_button_exportToExcelActionPerformed
 
@@ -568,20 +484,15 @@ public class MainWindow extends javax.swing.JFrame {
             return;
         }
         
-        
         try {
             
             FileInputStream fis = new FileInputStream(currentFile);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            
             DataModel dm = (DataModel) ois.readObject();
-            
             songObjects = dm.getSongObjects();
-            
             
             fis.close();
             ois.close();
-            
             
         } catch (FileNotFoundException ex) {
            // Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -601,14 +512,12 @@ public class MainWindow extends javax.swing.JFrame {
         // Writes all data in the program to a DataModel and saves the model to
         // this disk
         
-        if (currentFile == null) {
-            
+        if (currentFile == null) {  
             menuItem_saveAsActionPerformed(evt);
         }
         
         if (currentFile != null) {
         
-       
             try {
                 // jeep, makes pathway
                 FileOutputStream fos = new FileOutputStream(currentFile);
@@ -631,7 +540,6 @@ public class MainWindow extends javax.swing.JFrame {
                // Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, ex.toString(), "ERROR: Can't Write to Disk", JOptionPane.ERROR_MESSAGE);
             }
-        
         }
     }//GEN-LAST:event_menuItem_saveActionPerformed
 
@@ -644,11 +552,9 @@ public class MainWindow extends javax.swing.JFrame {
         JFileChooser jfc = new JFileChooser();
         
         if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-        
                 currentFile = jfc.getSelectedFile();
                 System.out.println(currentFile.toString());
                 menuItem_saveActionPerformed(evt);
-            
         }
     }//GEN-LAST:event_menuItem_saveAsActionPerformed
 
@@ -690,14 +596,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_button_affectionActionPerformed
 
     private void button_customActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_customActionPerformed
-        // TODO add your handling code here:
         textField_custom.setEnabled(true);
-//        String lyrics = textArea_lyrics.getText();
-//        try {
-//            highlightCustom(lyrics);
-//        } catch (BadLocationException ex) {
-//            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }//GEN-LAST:event_button_customActionPerformed
     
     /**
@@ -783,7 +682,6 @@ public class MainWindow extends javax.swing.JFrame {
         Workbook wb = WorkbookFactory.create(inputStream);
         Sheet ws = wb.getSheetAt(0);
         
-        
         // print to test
         for(int r = 2; r < 6140; r++) {
             
@@ -803,24 +701,14 @@ public class MainWindow extends javax.swing.JFrame {
                 artist = row.getCell(3).toString();
             if(row.getCell(4) != null)
                 lyrics = row.getCell(4).toString();
-            
-            // test print
-//            System.out.println(
-//                    "Year: " + year + "/"
-//                    + "Rank: " + rank + "/" 
-//                    + "Title: " + title + "/"
-//                    + "Artist: " + artist + "/"
-//                    + "Lyrics: " + lyrics);
-                  
+          
             // puts it in hashmap
             Song song = new Song(year, rank, title, artist, lyrics);
             System.out.println(song.toString());
             songObjects.put(title, new Song(year, rank, title, artist, lyrics));
             
-            //System.out.println(songObjects.get(title).toString());
             } // end of for loop
-            
-        
+           
         inputStream.close();
         wb.close();
         
@@ -836,7 +724,6 @@ public class MainWindow extends javax.swing.JFrame {
     
     // fills in songsList table with data from 2D array
     public void updateSongListTable(String data[][]) {
-        
         
         DefaultTableModel dfm = new DefaultTableModel();
         
@@ -1011,7 +898,6 @@ public class MainWindow extends javax.swing.JFrame {
             
             // With the lyrics, put it in the lyricsCell and save it
             lyricsCell.setCellValue(lyrics);
-            
         }
         
         inputStream.close();
@@ -1036,23 +922,8 @@ public class MainWindow extends javax.swing.JFrame {
             System.out.println(i + "   " + analyzer.gBannedCounter(i + "", ws, false));
         }
         
-        //System.out.println(analyzer.gBannedCounterSingle("\"Humble\"", ws));
-        
-        
-    
-       
-        //System.out.println("Carlin Count:: " + analyzer.carlinCounter(testYear, ws, true));
-        //System.out.println("Carlin Count Every Word:: " + analyzer.carlinCountEveryWord(testYear, ws, false));
-        //System.out.println("Google Banned:: " + analyzer.gBannedCounter(testYear, ws, true));
-        //System.out.println("Google Count Every Word:: " + analyzer.gBannedCountEveryWord(testYear, ws, false));
-        
-        
-        
-        
-        
         inputStream.close();
         wb.close();
-        
         
     }
     
@@ -1066,7 +937,6 @@ public class MainWindow extends javax.swing.JFrame {
         
         LyricsAnalyzer analyzer = new LyricsAnalyzer();
         
-        
         // headers
         XSSFRow headRow = (XSSFRow) wss.getRow(0);
         XSSFCell yearHead = headRow.createCell(1);
@@ -1074,31 +944,11 @@ public class MainWindow extends javax.swing.JFrame {
         yearHead.setCellValue("Year");
         carlinHead.setCellValue("Carlin Count");
         
-        //creates "r" rows with lyrics at r-cell 4... 6142 is max
-//        for(int r = 1; r < 65; r+= 1) {
-//            
-//            int year = r + 1953;
-//            // row/cell creation
-//            XSSFRow row = (XSSFRow) ws.getRow(r);
-//            XSSFCell yearCell = row.createCell(0);
-//            XSSFCell carlinCell = row.createCell(1);
-//            
-//            
-//            
-//            // Insert year and carlin value in cells
-//            yearCell.setCellValue(year + "");
-//            carlinCell.setCellValue(analyzer.carlinCounter(year + "", ws, false));
-//            
-//        }
-        
         inputStream.close();
         FileOutputStream outputStream = new FileOutputStream("/Users/landonpalmer/Desktop/Carlin_Every_Year.xlsx");
         wb.write(outputStream);
         wb.close();
         outputStream.close();
-        
-        
-        
         
     }
     
@@ -1109,7 +959,6 @@ public class MainWindow extends javax.swing.JFrame {
         // Start with one year, we will make it into loop later
         Scraper scraper = new Scraper();
         
-            
         System.out.println("Year:" + year);
         // Gets wiki year, making each song with an artist/title
         ArrayList <Song> songs = scraper.getSongsList(year);
@@ -1127,14 +976,12 @@ public class MainWindow extends javax.swing.JFrame {
             songsData[0][c] = headers[c];
         }
         for (int r = 0; r < length; r++) {
-
             Song song = songs.get(r);
             songsData[r + 1][0] = year + "";
             songsData[r + 1][1] = song.getRank();
             songsData[r + 1][2] = song.getTitle();
             songsData[r + 1][3] = song.getArtist();
             songsData[r + 1][4] = "";
-
         }
 
         // uses Apachi POI to export 2D array of song objects to excel
@@ -1142,15 +989,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
    
     public void printTest() throws IOException {
-//        Set<String> keys = songObjects.keySet();
-//        Iterator<String> iterator = keys.iterator();
-//        while(iterator.hasNext()) {
-//            
-//            String title = iterator.next();
-//            Song song = songObjects.get(title);
-//            System.out.println(song.toString());
-//            
-//        }
         Scraper scraper = new Scraper();
         System.out.println(scraper.getLyrics("Outside Today", "YoungBoy Never Broke Again"));
     }
@@ -1166,7 +1004,6 @@ public class MainWindow extends javax.swing.JFrame {
         highlighter.removeAllHighlights();
        
         // Analysis:
-
         // adds bad words to arrayList for analysis
         Scanner chopBadWords = new Scanner(new File(BANNED_WORDS_PATH));
         while(chopBadWords.hasNext()) {
@@ -1185,9 +1022,7 @@ public class MainWindow extends javax.swing.JFrame {
                     swears.add(word);
                 }
             }
-            
         }
-        
         
         Iterator<String> iterator = swears.iterator();
         while(iterator.hasNext()) {
@@ -1204,10 +1039,8 @@ public class MainWindow extends javax.swing.JFrame {
                 int p1 = p0 + badWord.length();
                 highlighter.addHighlight(p0, p1, painter);
                 
-                
                 i = lyrics.indexOf(badWord, i+1);
-            }
-            
+            } 
         }
       
     }
@@ -1240,10 +1073,8 @@ public class MainWindow extends javax.swing.JFrame {
                     //System.out.println(word + " and go stupid ahh");
                     drugs.add(word);
                 }
-            }
-            
+            } 
         }
-        
         
         Iterator<String> iterator = drugs.iterator();
         while(iterator.hasNext()) {
@@ -1260,14 +1091,13 @@ public class MainWindow extends javax.swing.JFrame {
                 int p1 = p0 + drugWord.length();
                 highlighter.addHighlight(p0, p1, painter);
                 
-                
                 i = lyrics.indexOf(drugWord, i+1);
-            }
-            
+            } 
         }
     }
     
     public void highlightAffections(String lyrics) throws BadLocationException, FileNotFoundException {
+        
         String BANNED_WORDS_PATH = "list_affection.txt";
         ArrayList<String> loveWords = new ArrayList();
         Set loves = new HashSet(); // haha get it
@@ -1275,8 +1105,8 @@ public class MainWindow extends javax.swing.JFrame {
         Highlighter highlighter = textArea_lyrics.getHighlighter();
         // important for switching between
         highlighter.removeAllHighlights();
+        
         // Analysis:
-
         // adds bad words to arrayList for analysis
         Scanner chopLoveWords = new Scanner(new File(BANNED_WORDS_PATH));
         while(chopLoveWords.hasNext()) {
@@ -1298,7 +1128,6 @@ public class MainWindow extends javax.swing.JFrame {
             
         }
         
-        
         Iterator<String> iterator = loves.iterator();
         while(iterator.hasNext()) {
             // loops through badWords and highlights based on indexOf
@@ -1314,7 +1143,6 @@ public class MainWindow extends javax.swing.JFrame {
                 int p1 = p0 + loveWord.length();
                 highlighter.addHighlight(p0, p1, painter);
                 
-                
                 i = lyrics.indexOf(loveWord, i+1);
             }
             
@@ -1322,7 +1150,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     public void highlightCustom(String lyrics) throws BadLocationException {
-        
         
         Highlighter highlighter = textArea_lyrics.getHighlighter();
         // important for switching between
@@ -1341,19 +1168,9 @@ public class MainWindow extends javax.swing.JFrame {
                 int p1 = p0 + target.length();
                 highlighter.addHighlight(p0, p1, painter);
 
-
                 i = lyrics.indexOf(target, i+1);
             }
-        }
-                
-            
-            
-        
-        
-        
-            
-            
-        
+        }    
     }
     
     public void updateSongStats(String lyrics) throws FileNotFoundException {
@@ -1387,7 +1204,6 @@ public class MainWindow extends javax.swing.JFrame {
             loveWords.add(loveWord);
         }
         
-        
         Scanner chopper = new Scanner(lyrics);
         while(chopper.hasNext()) {
             String word = chopper.next();
@@ -1407,12 +1223,8 @@ public class MainWindow extends javax.swing.JFrame {
                 }
             }
         }
-                
-        
-   
-        
+
         // Update table
-        
         // row 1 - is explicit
         if(badWordCount > 0) {
             table_stats.setValueAt("True", 0, 1);
@@ -1428,276 +1240,4 @@ public class MainWindow extends javax.swing.JFrame {
         table_stats.setValueAt(loveWordCount + "", 3, 1);
         
     }
-
-    // unused
-    public void doEverything() {
-        
-        /* // delete here
-            
-            
-            
-            // String formatting for requesting URL (lyricswiki):
-            // String of title and artist:
-            // replace spaces with underscores
-            // capitalize first letter
-            // remove quotes from title
-            
-            // from title: replace spaces with underscore
-            //             and delete surrounding quotes
-            testTitle = testTitle.replace(" ", "_");
-            testTitle = testTitle.replace("\"", "");
-            testTitle = testTitle.replace(" ", "_");
-            testTitle = testTitle.replace(",", "");
-            
-            // Specific song title cases -----------------------
-            
-            // 1954
-            if(testTitle.equals("Oh!_My_Pa-Pa")) {
-                testTitle = "Oh!_My_Pa-Pa_(O_Mein_Papa)";
-            }
-            
-            // 2017
-            if(testTitle.equals("Look_at_Me!")) {
-                testTitle = "Look_at_Me";
-            }
-            
-            if(testTitle.equals("iSpy")) {
-                testTitle = "ISpy";
-            }
-            
-            
-            if(testTitle.equals("(Till)_I_Kissed_You")) {
-                testTitle = "Till_I_Kissed_You";
-            }
-            
-            if(testTitle.equals("Return_to_Me")) {
-                testTitle = "Return_To_Me_(Ritorna-Me)";
-            }
-            
-            // --------------------------------------------
-            
-            
-            // from artist: replace spaces with underscore
-            //              and get rid of feature in artist name
-            //              as well as capitalize
-            //              and switch "and" to "&" (%26)
-            testArtist = testArtist.substring(0, 1).toUpperCase() + testArtist.substring(1);
-            testArtist = testArtist.replace(" ", "_");
-            
-            if(testArtist.contains("featuring")) {
-                testArtist = testArtist.substring(0, testArtist.indexOf("featuring") - 1 );
-            }
-            if(testArtist.contains("_and_")) {
-                testArtist = testArtist.replace("and", "%26");
-            }
-            
-            // Specific song artist cases -----------------------
-            
-            // Unknown year
-            if(testArtist.equals("Carl_Dobkins_Jr.")) {
-                testArtist = "Carl_Dobkins,_Jr.";
-            }
-            
-            // --------------------------------------------------
-            
-            
-            // url fetch, assigning song's lyrics to String "lyrics"
-            // from lyrics wikia
-            
-            //String url = "http://lyrics.wikia.com/wiki/" + testArtist + ":" + testTitle;
-            //System.out.println("URL: " + url + "\n");
-            
-            */ //if all goes wrong delete here
-            
-        // variables
-        ArrayList <Song> songs = new ArrayList();
-        int year = 2014; // year to scrape
-        
-        String url = "https://en.wikipedia.org/wiki/Billboard_Year-End_Hot_100_singles_of_" + year;
-        
-        // song variable declaration
-        String rank = "";
-        String songName = "";
-        String artistName = "";
-        
-        System.out.println(year);
-
-        
-            
-        try{
-            
-            // connector
-            // Document variable to connect to specified url
-            // userAgent put in for less sketch
-            // maxBodySize(0) allows for unlimited body size of elements
-            
-            Document d = Jsoup.connect(url).userAgent("Mozilla/17.0").maxBodySize(0).get();
-            
-
-            // Loops through elements within created Elements class (temp)
-            // this is the functional part, html data to text
-            Element table = d.select("table").get(0); //select the first table.
-            Elements rows = table.select("tr");
-    
-            Iterator<Element> rowIterator = rows.iterator();
-            rowIterator.next();
-
-            while (rowIterator.hasNext()) {
-                
-                Element row = rowIterator.next();
-                
-                Elements cols = row.select("td");
-                
-                // This portion is done within each row
-                // years 1951-1981 have rank in table as "th"
-                // years 1982-2017 have rank in table as "td"
-                // so condtional applied
-                
-                if(year > 1981) {
-                    Elements rankHead = row.select("th");
-                    rank = rankHead.get(0).text();
-                    songName = cols.get(0).text();
-                    artistName = cols.get(1).text();
-                }
-                else {
-                    rank = cols.get(0).text();
-                    songName = cols.get(1).text();
-                    artistName = cols.get(2).text();
-                }
-                
-                // creates song object (w/ rank, title, and artist)
-                // and adds it to song object list
-                //Song songboi = new Song(rank, songName, artistName);
-                //songs.add(songboi);
-                //System.out.println(songboi.toString());
-                
-            }
-            
-      
-           } catch(IOException e) {
-            e.printStackTrace();
-            }
-
-        
-        // now lyrics:
-        
-        try{
-            // generate random index of song list
-            
-            int random = (int )(Math.random() * 50 + 1);
-            
-            // get the title and arist names from song
-            
-            Song randomSong = songs.get(random);
-            String testTitle = randomSong.getTitle();
-            String testArtist = randomSong.getArtist();
-            
-            // Print for display
-            System.out.println("Random:" + "\n");
-            System.out.println("Song Title: " + testTitle);
-            System.out.println("Song Artist: " + testArtist);
-            
-            // String formatting for requesting URL (lyricswiki):
-            // String of title and artist:
-            // replace spaces with underscores
-            // capitalize first letter
-            // remove quotes from title
-            
-            // from title: replace spaces with underscore
-            //             and delete surrounding quotes
-            testTitle = testTitle.replace(" ", "_");
-            testTitle = testTitle.replace("\"", "");
-            
-            // from artist: replace spaces with underscore
-            //              and get rid of feature in artist name
-            //              as well as capitalize
-            //              and switch "and" to "&" (%26)
-            testArtist = testArtist.substring(0, 1).toUpperCase() + testArtist.substring(1);
-            testArtist = testArtist.replace(" ", "_");
-            
-            if(testArtist.contains("featuring")) {
-                testArtist = testArtist.substring(0, testArtist.indexOf("featuring") - 1 );
-            }
-            if(testArtist.contains("and")) {
-                testArtist = testArtist.replace("and", "%26");
-            }
-            
-           
-            
-            // url fetch, assigning song's lyrics to String "lyrics"
-            // from lyrics wikia (All rights reserved)
-            
-            url = "http://lyrics.wikia.com/wiki/" + testArtist + ":" + testTitle;
-            System.out.println("\n" + "URL: " + url);
-        
-            Document d = Jsoup.connect(url).userAgent("Mozilla/17.0").maxBodySize(0).get();
-            
-            String lyrics = d.select(".lyricbox").get(0).text();
-            System.out.println("\n" + lyrics);
-            
-            // Analyzing lyrics, chops String up by word
-            Scanner chopper = new Scanner(lyrics);
-            int swearCount = 0;
-            
-            while(chopper.hasNext()) {
-                String word = chopper.next();
-                // Counting swears in lyrics
-
-                
-                if(word.contains("fuck") || word.contains("Fuck")) {
-                    swearCount++;
-                    System.out.println("Word found: fuck");
-                }
-                if(word.contains("shit") || word.contains("Shit")) {
-                    swearCount++;
-                    System.out.println("Word found: shit");
-                }
-                if(word.contains("ass") || word.contains("Ass")) {
-                    swearCount++;
-                    System.out.println("Word found: ass");
-                }
-                if(word.contains("nigga") || word.contains("Nigga")) {
-                    swearCount++;
-                    System.out.println("Word found: n*gga");
-                }
-                if(word.contains("pussy") || word.contains("Pussy")) {
-                    swearCount++;
-                    System.out.println("Word found: pussy");
-                }
-                if(word.contains("bitch") || word.contains("Bitch")) {
-                    swearCount++;
-                    System.out.println("Word found: bitch");
-                }
-                if(word.contains("dick") || word.contains("Dick")) {
-                    swearCount++;
-                    System.out.println("Word found: dick");
-                }
-                if(word.contains("damn") || word.contains("Damn")) {
-                    swearCount++;
-                    System.out.println("Word found: damn");
-                }
-            
-            }
-            
-            
-            System.out.println("\n" + "Swear Count: " + swearCount);
-            //Element 
-        
-            
-           
-           } catch(IOException e) {
-            e.printStackTrace();
-            }
-        
-        
-    }
-    
-    
-        
-       
-    
-    
-    
-
-
 } // end of class

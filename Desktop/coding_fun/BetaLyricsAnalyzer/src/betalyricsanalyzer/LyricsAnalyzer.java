@@ -120,7 +120,6 @@ public class LyricsAnalyzer {
                     gBannedWordsSet.clear();
                 }
         
-        
             }
         }
         return gBannedCount;
@@ -178,8 +177,6 @@ public class LyricsAnalyzer {
         }
         return gBannedWordsSet.size();
     
-        
-        
     }
     
     public String cleanLyrics(String lyrics) {
@@ -205,11 +202,7 @@ public class LyricsAnalyzer {
             if(word.contains(mistake))
                 return false;
         }
-        
         return true;
     }
-    
-    
-    
     
 } // end of class

@@ -24,8 +24,6 @@ public class Song implements Serializable{
     private String lyrics;
 
     
-    
-
     public Song() {
         year = "";
         rank = "";
