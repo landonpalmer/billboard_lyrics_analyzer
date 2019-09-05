@@ -1,6 +1,6 @@
 Billboard Lyrics Analyzer
 
-Howdy! This project was just uploaded to showcase my coding skills for an internship. This project was created
+Howdy! This project was just uploaded to showcase my coding skills for an internship (and is a bit overengineered for that reason). This project was created
 for my Capstone Diploma project which earned the maximum score possible (shoot me an email at landonjpalmer@gmail.com for a copy of my research paper). It came out better than expected, as it features the ability to access any song from the Billboard 100 Year-End Rankings from it's creation in 1951 to the most recent edition as of today (9/4/2019). This was made possible with the scraping library "Jsoup" and lots of "Inspect Element" in Chrome.
 
 The source for the lyrics is a website that permits the replication of content for non-commercial use. However, to avoid automatic black-listing, there are some methods to throw off auto-banning like random request time-intervals and user-agents.
