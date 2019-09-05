@@ -844,10 +844,8 @@ public class MainWindow extends javax.swing.JFrame {
             XSSFRow row;
             row = ws.createRow(r);
             for(int c = 0; c < 5; c++) {
-                
                 XSSFCell cell = row.createCell(c);
                 cell.setCellValue( (String) data[r][c]);
-                
             }
         }
         
