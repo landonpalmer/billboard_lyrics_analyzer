@@ -63,7 +63,7 @@ public class LyricsAnalyzer {
             
     public int gBannedCounter(String year, Sheet ws, boolean isDecade) throws FileNotFoundException {
         
-        String BANNED_WORDS_PATH = "/Users/landonpalmer/Desktop/list_badWords.txt";
+        String BANNED_WORDS_PATH = "list_badWords.txt";
         String testYear = year;
         // for decade search
         if(isDecade)
@@ -128,7 +128,7 @@ public class LyricsAnalyzer {
     
     public int gBannedCounterSingle(String title, Sheet ws) throws FileNotFoundException {
         
-        String BANNED_WORDS_PATH = "/Users/landonpalmer/Desktop/list_badWords.txt";
+        String BANNED_WORDS_PATH = "list_badWords.txt";
         
         // contains matched words
         Set gBannedWordsSet = new HashSet();
@@ -181,8 +181,6 @@ public class LyricsAnalyzer {
         
         
     }
-    
-    
     
     public String cleanLyrics(String lyrics) {
         lyrics = lyrics.toLowerCase();

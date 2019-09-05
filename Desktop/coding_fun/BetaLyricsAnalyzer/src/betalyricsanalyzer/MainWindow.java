@@ -154,6 +154,7 @@ public class MainWindow extends javax.swing.JFrame {
         table_songsList = new javax.swing.JTable();
         button_exportToExcel = new javax.swing.JButton();
         jLabel_year = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuItem_open = new javax.swing.JMenuItem();
@@ -362,6 +363,10 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel_year.setText("Billboard Year: ");
         getContentPane().add(jLabel_year);
         jLabel_year.setBounds(270, 40, 240, 22);
+
+        jLabel1.setText("Click on a song for lyrics analysis!");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(30, 480, 200, 20);
 
         jMenu1.setText("File");
 
@@ -744,6 +749,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JRadioButton button_obscenity;
     private javax.swing.JComboBox<String> comboBox_selectYear;
     private javax.swing.JDialog dialogue_lyricsWindow;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel_year;
